@@ -127,7 +127,6 @@ class TelaAgendamento():
             big_string = ''
             for agendamento in lista_agendamentos:
                 big_string =  str(big_string) + '\nCódigo: ' + str(agendamento['codigo']) + '\n' + 'Paciente: ' + str(agendamento['paciente']) + '\n' + 'Enfermeiro: ' + str(agendamento['enfermeiro']) + '\n' + 'Vacina: ' + str(agendamento['vacina']) + '\n' + 'Data e Hora: ' + str(agendamento['data_hora']) + '\n' + 'Conclusão: ' + str(agendamento['conclusao']) + '\n--------------------------' #cria uma string com todas as vacinas do estoque para poder mostrar na tela
-                #big_string =  str(big_string) + '\nCódigo: ' + str(agendamento['codigo']) + '\n' + 'Vacina: ' + str(agendamento['vacina']) + '\n' + 'Data e Hora: ' + str(agendamento['data_hora']) + '\n' + 'Conclusão: ' + str(agendamento['conclusao']) + '\n--------------------------'
             layout = [
                 [sg.Txt('Lista de ' + texto)],
                 [sg.Txt(big_string)],
