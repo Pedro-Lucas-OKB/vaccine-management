@@ -1,4 +1,5 @@
 from model.pessoa import Pessoa
+from controller.excecoes import PacienteIdadeInvalidaException
 
 class Paciente(Pessoa):
 
@@ -7,7 +8,7 @@ class Paciente(Pessoa):
         if isinstance(idade, int) and 0<idade<=150:
             self.__idade = idade
         else:
-            raise Exception
+            raise PacienteIdadeInvalidaException
         self.__numero_doses = 0
 
     @property
@@ -19,7 +20,7 @@ class Paciente(Pessoa):
         if isinstance(idade, int):
             self.__idade = idade
         else:
-            raise Exception
+            raise PacienteIdadeInvalidaException
 
     @property
     def numero_doses(self):
