@@ -6,6 +6,7 @@ from view.tela_paciente import TelaPaciente
 from controller.excecoes import ListaVaziaException
 from controller.excecoes import CampoEmBrancoException
 from controller.excecoes import NenhumSelecionadoException
+from controller.excecoes import PacienteJaVacinadoException
 
 class ControladorPacientes():
 
@@ -80,9 +81,9 @@ class ControladorPacientes():
                 paciente_vacinado.numero_doses += 1
                 self.paciente_dao.update()
             else:
-                raise Exception
-        except:
-            self.__tela_paciente.mensagem('Não é possível concluir este agendamento. O paciente já recebeu duas doses de vacina.')
+                raise PacienteJaVacinadoException
+        except PacienteJaVacinadoException as mensagem:
+        self.__tela_paciente.mensagem(mensagem)
 
     def lista_pacientes(self): #retorna uma lista de dicionarios contendo as informações dos pacientes ou None caso não exista nenhum cadastrado.
         try: 

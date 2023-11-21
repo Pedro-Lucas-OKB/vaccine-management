@@ -14,3 +14,6 @@ class VacinaIndisponivelException(Exception):
     def __init__(self):
         super().__init__('Não foi possível cadastrar este agendamento pois não há doses suficientes de vacina disponível')
 
+class PacienteJaVacinadoException(Exception):
+    def __init__(self):
+        super().__init__('Não é possível concluir este agendamento. O paciente já recebeu duas doses de vacina.')
