@@ -17,7 +17,7 @@ class TelaEnfermeiros:
                 [sg.ReadButton('Voltar', size = (30, 1), key = 0)]
             ]
         self.__window = sg.Window('PACIENTES', size = (400, 230), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -53,7 +53,7 @@ class TelaEnfermeiros:
                 [sg.Exit('Ok', size = (20, 1))]
                 ]
             self.__window = sg.Window("Lista de enfermeiros").Layout(layout)
-            button, values = self.__window.Read()
+            _, _ = self.__window.Read()
             self.__window.Close()
     
     def combo_box_enfermeiros(self, lista_enfermeiros): #cria um combobox com todos os enfermeiros cadastrados atravez de uma lista de dicionarios recebida do controlador e retorna um dicionario com o enfermeiro selecionado. 
@@ -85,5 +85,5 @@ class TelaEnfermeiros:
             [sg.Exit('Ok', size = (20, 1))]
         ]
         self.__window = sg.Window('Aviso!', element_justification = 'c').Layout(layout)
-        buttons, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()
