@@ -83,7 +83,7 @@ class ControladorPacientes():
             else:
                 raise PacienteJaVacinadoException
         except PacienteJaVacinadoException as mensagem:
-        self.__tela_paciente.mensagem(mensagem)
+            self.__tela_paciente.mensagem(mensagem)
 
     def lista_pacientes(self): #retorna uma lista de dicionarios contendo as informações dos pacientes ou None caso não exista nenhum cadastrado.
         try: 
