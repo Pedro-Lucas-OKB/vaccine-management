@@ -11,12 +11,12 @@ class ControladorEnfermeiros():
 
     def __init__(self, tela_enfermeiros: TelaEnfermeiros):
         self.__tela_enfermeiros = tela_enfermeiros
-        self.__enfermeiro_DAO = EnfermeiroDAO()
-        if len(self.__enfermeiro_DAO.get_all()) == 0:
+        self.enfermeiro_dao = EnfermeiroDAO()
+        if len(self.enfermeiro_dao.get_all()) == 0:
             self.__gera_codigo = int(100) #codigo dos enfermeiros começa em 100
         else:
             codigo = 100
-            for enfermeiro in self.__enfermeiro_DAO.get_all(): #encontra o maior codigo que já foi usado.
+            for enfermeiro in self.enfermeiro_dao.get_all(): #encontra o maior codigo que já foi usado.
                 if enfermeiro.codigo > codigo:
                     codigo = enfermeiro.codigo
             self.__gera_codigo = codigo + 1
@@ -32,17 +32,17 @@ class ControladorEnfermeiros():
             except CampoEmBrancoException as mensagem:
                 self.__tela_enfermeiros.mensagem(mensagem)   
         if nome is not None:
-            self.__enfermeiro_DAO.add(Enfermeiro(nome, self.__gera_codigo)) 
+            self.enfermeiro_dao.add(Enfermeiro(nome, self.__gera_codigo)) 
             self.__gera_codigo += 1 #incrementa o codigo
               
     def remove_enfermeiro(self):
         enfermeiro_selecionado = self.seleciona_enfermeiro()
         if enfermeiro_selecionado is not None:
-            self.__enfermeiro_DAO.remove(enfermeiro_selecionado)
+            self.enfermeiro_dao.remove(enfermeiro_selecionado)
             self.__tela_enfermeiros.mensagem('Excluido!')
 
     def edita_enfermeiro(self):
-        enfermeiro = self.__enfermeiro_DAO.get(self.seleciona_enfermeiro())
+        enfermeiro = self.enfermeiro_dao.get(self.seleciona_enfermeiro())
         if enfermeiro is not None: #se o usuario fechar a tela ou clicar em voltar antes de selecionar o enfermeiro, nem tenta ler o nome.
             while True: #obtem o novo nome ou None
                 try:
@@ -55,13 +55,13 @@ class ControladorEnfermeiros():
                     self.__tela_enfermeiros.mensagem(mensagem)
         if enfermeiro is not None and novo_nome is not None:
             enfermeiro.nome = novo_nome
-            self.__enfermeiro_DAO.update()
+            self.enfermeiro_dao.update()
 
     def lista_enfermeiros(self): #retorna uma lista de dicionarios contendo as informações dos enfermeiros ou None cado não exista nenhum cadastrado.
         try: 
-            if len(self.__enfermeiro_DAO.get_all()) > 0:
+            if len(self.enfermeiro_dao.get_all()) > 0:
                 lista_enfermeiros = []
-                for enfermeiro in self.__enfermeiro_DAO.get_all():
+                for enfermeiro in self.enfermeiro_dao.get_all():
                     lista_enfermeiros.append({"codigo": enfermeiro.codigo, "nome": enfermeiro.nome})
             else:
                 lista_enfermeiros = None
@@ -71,7 +71,7 @@ class ControladorEnfermeiros():
         return lista_enfermeiros 
 
     def encontra_enfermeiro_por_codigo(self, codigo):
-        return self.__enfermeiro_DAO.get(codigo)
+        return self.enfermeiro_dao.get(codigo)
   
     def mostra_enfermeiros(self): #abre a tela que lista os enfermeiros
         self.__tela_enfermeiros.mostra_enfermeiros(self.lista_enfermeiros())
