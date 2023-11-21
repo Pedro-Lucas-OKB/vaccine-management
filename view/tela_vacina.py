@@ -15,7 +15,7 @@ class TelaVacina():
                 [sg.ReadButton('Voltar', size = (30, 1), key = 0)]
             ]
         self.__window = sg.Window('VACINAS', size = (400, 230), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -69,7 +69,7 @@ class TelaVacina():
                 [sg.Exit('Ok', size = (20, 1))]
                 ]
             self.__window = sg.Window("Lista de vacinas disponíveis").Layout(layout)
-            button, values = self.__window.Read()
+            _, _ = self.__window.Read()
             self.__window.Close()
 
     def selecionar_vacina(self, lista_vacinas):
@@ -104,7 +104,7 @@ class TelaVacina():
             [sg.Exit('Ok', size = (20, 1))]
         ]
         self.__window = sg.Window('Aviso!', element_justification = 'c').Layout(layout)
-        buttons, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()
 
 

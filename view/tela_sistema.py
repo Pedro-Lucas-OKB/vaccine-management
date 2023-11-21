@@ -17,7 +17,7 @@ class TelaSistema():
                 [sg.ReadButton('Sair', size = (30, 1), key = 0)]
             ]
         self.__window = sg.Window('SISTEMA DE GERENCIAMENTO DE VACINAÇÃO', size = (400, 300), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -32,7 +32,7 @@ class TelaSistema():
             [sg.ReadButton('Voltar', pad=((180, 0), 3))] 
         ]
         self.__window = sg.Window('Relatório').Layout(layout)
-        button, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()
     
     def mensagem(self, mensagem: str): #função para exibir avisos na tela.
@@ -41,6 +41,6 @@ class TelaSistema():
             [sg.Exit('Ok', size = (20, 1))]
         ]
         self.__window = sg.Window('Aviso!', element_justification = 'c').Layout(layout)
-        buttons, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()
         

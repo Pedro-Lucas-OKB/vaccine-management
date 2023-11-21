@@ -16,7 +16,7 @@ class TelaPaciente:
                 [sg.ReadButton('Voltar', size = (30, 1), key = 0)]
             ]
         self.__window = sg.Window('PACIENTES', size = (400, 230), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -79,7 +79,7 @@ class TelaPaciente:
                 [sg.Exit('Ok', size = (20, 1))]
                 ]
             self.__window = sg.Window("Lista de pacientes").Layout(layout)
-            button, values = self.__window.Read()
+            _, _ = self.__window.Read()
             self.__window.Close()
 
     def mensagem(self, mensagem: str): #função para exibir avisos na tela.
@@ -88,5 +88,5 @@ class TelaPaciente:
             [sg.Exit('Ok', size = (20, 1))]
         ]
         self.__window = sg.Window('Aviso!', element_justification = 'c').Layout(layout)
-        buttons, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()

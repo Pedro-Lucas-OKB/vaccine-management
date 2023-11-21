@@ -18,7 +18,7 @@ class TelaAgendamento():
                 [sg.ReadButton('Voltar', size = (30, 1), key = 0)]
             ]
         self.__window = sg.Window('AGENDAMENTOS', size = (400, 230), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -133,7 +133,7 @@ class TelaAgendamento():
                 [sg.Exit('Ok', size = (20, 1))]
                 ]
             self.__window = sg.Window("Lista de agendamentos").Layout(layout)
-            button, values = self.__window.Read()
+            _, _ = self.__window.Read()
             self.__window.Close()
     
     def selecionar_lista_agendamentos(self):
@@ -145,7 +145,7 @@ class TelaAgendamento():
                 [sg.ReadButton('Voltar', size = (30,1), key = 0)]
         ]
         self.__window = sg.Window('AGENDAMENTOS', size = (400, 230), element_justification='c').Layout(layout)
-        button, values = self.__window.Read()
+        button, _ = self.__window.Read()
         self.__window.Close()
         opcao = button
         return opcao
@@ -156,7 +156,7 @@ class TelaAgendamento():
             [sg.Exit('Ok', size = (20, 1))]
         ]
         self.__window = sg.Window('Aviso!', element_justification = 'c').Layout(layout)
-        buttons, values = self.__window.Read()
+        _, _ = self.__window.Read()
         self.__window.Close()
     
     
