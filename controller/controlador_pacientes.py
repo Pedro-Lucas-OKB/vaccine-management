@@ -11,12 +11,12 @@ class ControladorPacientes():
 
     def __init__(self, tela_paciente: TelaPaciente):
         self.__tela_paciente = tela_paciente
-        self.__paciente_DAO = PacienteDAO()
-        if len(self.__paciente_DAO.get_all()) == 0:
+        self.paciente_dao = PacienteDAO()
+        if len(self.paciente_dao.get_all()) == 0:
             self.__gera_codigo = int(200) #codigo dos pacientes começa em 200
         else:
             codigo = 200
-            for paciente in self.__paciente_DAO.get_all(): #encontra o maior codigo que já foi usado.
+            for paciente in self.paciente_dao.get_all(): #encontra o maior codigo que já foi usado.
                 if paciente.codigo > codigo:
                     codigo = paciente.codigo
             self.__gera_codigo = codigo + 1
@@ -39,16 +39,16 @@ class ControladorPacientes():
             except CampoEmBrancoException as mensagem:
                 self.__tela_paciente.mensagem(mensagem)
         if dados is not None: #somente cadastra o novo paciente caso a janela não tenha sido fechada a ou clicado em voltar.
-            self.__paciente_DAO.add(Paciente(dados['nome'], int(dados['idade']), self.__gera_codigo))
+            self.paciente_dao.add(Paciente(dados['nome'], int(dados['idade']), self.__gera_codigo))
             self.__gera_codigo += 1 #incrementa o codigo
 
     def remove_paciente(self):
         codigo_paciente = self.seleciona_paciente()
         if codigo_paciente is not None:
-            self.__paciente_DAO.remove(codigo_paciente)
+            self.paciente_dao.remove(codigo_paciente)
 
     def edita_paciente(self):
-        paciente = self.__paciente_DAO.get(self.seleciona_paciente())
+        paciente = self.paciente_dao.get(self.seleciona_paciente())
         if paciente is not None: #se o usuario fechar a tela ou clicar em voltar antes de selecionar o paciente, nem tenta ler os dados.
             while True: #obtem os novos dados ou None
                 try:
@@ -68,17 +68,17 @@ class ControladorPacientes():
         if paciente is not None and novos_dados is not None: #somente edita caso a janela não tenha sido fechada.
             paciente.nome = novos_dados['nome']
             paciente.idade = int(novos_dados['idade']) #foi garantido que o numero é inteiro anteriormente.
-            self.__paciente_DAO.update()
+            self.paciente_dao.update()
    
     def encontra_paciente_por_codigo(self, codigo):
-        return self.__paciente_DAO.get(codigo)
+        return self.paciente_dao.get(codigo)
     
     def vacina_paciente(self,codigo):
-        paciente_vacinado = self.__paciente_DAO.get(codigo)
+        paciente_vacinado = self.paciente_dao.get(codigo)
         try:
             if paciente_vacinado.numero_doses < 2:
                 paciente_vacinado.numero_doses += 1
-                self.__paciente_DAO.update()
+                self.paciente_dao.update()
             else:
                 raise Exception
         except:
@@ -86,9 +86,9 @@ class ControladorPacientes():
 
     def lista_pacientes(self): #retorna uma lista de dicionarios contendo as informações dos pacientes ou None caso não exista nenhum cadastrado.
         try: 
-            if len(self.__paciente_DAO.get_all()) > 0:
+            if len(self.paciente_dao.get_all()) > 0:
                 lista_pacientes = []
-                for paciente in self.__paciente_DAO.get_all():
+                for paciente in self.paciente_dao.get_all():
                     lista_pacientes.append({'codigo': paciente.codigo, 'nome': paciente.nome, 'idade': paciente.idade, 'numero_doses': paciente.numero_doses})
             else:
                 lista_pacientes = None
