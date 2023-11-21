@@ -18,6 +18,6 @@ class PacienteJaVacinadoException(Exception):
     def __init__(self):
         super().__init__('Não é possível concluir este agendamento. O paciente já recebeu duas doses de vacina.')
 
- class PacienteIdadeInvalidaException(Exception):
-        def __init__(self):
-            super().__init__('A idade do paciente deve estar entre 0 e 150.')
+class PacienteIdadeInvalidaException(Exception):
+    def __init__(self):
+        super().__init__('A idade do paciente deve estar entre 0 e 150.')
